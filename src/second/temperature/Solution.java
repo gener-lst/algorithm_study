@@ -4,15 +4,15 @@ import java.util.Stack;
 
 public class Solution {
     public int[] solution(int[] temps) {
-        int[] ans = new int[temps.length];
+        int[] sol = new int[temps.length];
         Stack<Integer> stack = new Stack<>();
-        for (int day = 0; day < temps.length; day++) {
-            while (!stack.isEmpty() && temps[stack.peek()] < temps[day]) {
-                int prevDay = stack.pop();
-                ans[prevDay] = day - prevDay;
+        for (int i = 0; i < temps.length; i++) {
+            while (!stack.isEmpty() && temps[stack.peek()] < temps[i]) {
+                int takenTime = stack.pop();
+                sol[takenTime] = i - takenTime;
             }
-            stack.push(day);
+            stack.push(i);
         }
-        return ans;
+        return sol;
     }
 }

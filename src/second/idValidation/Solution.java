@@ -1,4 +1,4 @@
-package second.id;
+package second.idValidation;
 
 public class Solution {
     public String solution(String new_id) {
