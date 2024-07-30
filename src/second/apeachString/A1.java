@@ -3,7 +3,6 @@ package second.apeachString;
 public class A1 {
     public int solution(String s) {
 //      문제를 잘못 이해함 -> 내부에서 반복되는 문자열에 대해 중복 부분이 몇 번 반복되는지로 압축하는 것으로 최초에 풀었음
-
         int minLength = s.length();
         int n = s.length();
 
