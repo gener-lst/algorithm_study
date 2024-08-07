@@ -1,5 +1,6 @@
 package ch03.prime;
-import java.util.ArrayList;
+
+import java.util.*;
 
 class Solution {
     public static boolean[] visited;
@@ -10,8 +11,6 @@ class Solution {
         int answer = 0;
 
         dfs(0, numbers, "");
-
-        System.out.println(ans);
 
         for (Integer num : ans) {
             if (isPrime(num)) {
@@ -43,7 +42,7 @@ class Solution {
         if (num < 2) {
             return false;
         }
-        for (int i = 2; i <= (int) Math.sqrt(num); i++) {
+        for (int i = 2; i * i <= num; i++) {
             if (num % i == 0) {
                 return false;
             }
