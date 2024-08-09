@@ -1,9 +1,8 @@
 package ch02.rotateBracket;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
-public class Solution {
+class Solution {
     public int solution(String s) {
         int answer = 0;
 
@@ -24,14 +23,12 @@ public class Solution {
                 stack.push(ch);
             } else {
                 if (stack.isEmpty()) return false;
-                if (stack.peek() == '(' && ch == ')')
+                if ((stack.peek() == '(' && ch == ')') ||
+                    (stack.peek() == '[' && ch == ']') ||
+                    (stack.peek() == '{' && ch == '}')) {
                     stack.pop();
-                else if (stack.peek() == '[' && ch == ']')
-                    stack.pop();
-                else if (stack.peek() == '{' && ch == '}')
-                    stack.pop();
+                }
             }
-
         }
         return stack.isEmpty();
     }

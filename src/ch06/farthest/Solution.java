@@ -16,35 +16,35 @@ public class Solution {
             graph.get(e[1]).add(e[0]);
         }
 
-        return bfs(graph, 1);
+        return bfs(1);
     }
 
-    private int bfs(Map<Integer, List<Integer>> graph, int node) {
-       Queue<int[]> queue = new ArrayDeque<>();
-       queue.offer(new int[]{node, 0});
-       visited.put(node, true);
+    private int bfs(int node) {
+        Queue<int[]> queue = new ArrayDeque<>();
+        queue.offer(new int[]{node, 0});
+        visited.put(node, true);
 
-       int maxDist = 0;
-       int count = 0;
+        int maxDist = 0;
+        int count = 0;
 
-       while (!queue.isEmpty()) {
-           int cur[] = queue.poll();
-           int curVertex = cur[0];
-           int dist = cur[1];
+        while (!queue.isEmpty()) {
+            int cur[] = queue.poll();
+            int curVertex = cur[0];
+            int dist = cur[1];
 
-           if(maxDist < dist) {
-               maxDist = dist;
-               count = 1;
-           } else if(maxDist == dist) count ++;
+            if(maxDist < dist) {
+                maxDist = dist;
+                count = 1;
+            } else if(maxDist == dist) count ++;
 
-           for(int nextVertex: graph.get(curVertex)) {
-               if(!visited.get(nextVertex)) {
-                   visited.put(nextVertex, true);
+            for(int nextVertex: graph.get(curVertex)) {
+                if(!visited.get(nextVertex)) {
+                    visited.put(nextVertex, true);
                     queue.offer(new int[]{nextVertex, dist + 1});
-               }
-           }
-       }
+                }
+            }
+        }
 
-       return count;
+        return count;
     }
 }

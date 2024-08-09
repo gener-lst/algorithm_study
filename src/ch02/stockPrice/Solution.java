@@ -1,5 +1,6 @@
 package ch02.stockPrice;
 
+// 이중 for문 풀이
 public class Solution {
     public int[] solution(int[] prices) {
         int[] answer = new int[prices.length];

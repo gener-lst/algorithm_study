@@ -1,7 +1,6 @@
 package ch05.shortestPath;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 class Solution {
     public int solution(int[][] maps) {
@@ -10,7 +9,6 @@ class Solution {
         int rowLength = maps.length;
         int colLength = maps[0].length;
         boolean[][] visited = new boolean[rowLength][colLength];
-        int answer = 0;
 
         Queue<int[]> queue = new ArrayDeque();
         queue.offer(new int[]{0,0,1});
@@ -25,7 +23,6 @@ class Solution {
             if(r == rowLength - 1 && c == colLength - 1) {
                 return dist;
             }
-
 
             for(int i = 0; i < 4; i++) {
                 int nr = r + dr[i];
