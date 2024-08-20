@@ -1,55 +1,58 @@
 package ch05.fastest;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
-class Solution {
-    public int shortestPathBinaryMatrix(int[][] grid) {
-        // 초기값 세팅
-        int[] dr = {1, -1, 0, 0, 1, 1, -1, -1};
-        int[] dc = {0, 0, 1, -1, 1, -1, 1, -1};
-        int rowLength = grid.length;
-        int colLength = grid[0].length;
-        boolean[][] visited = new boolean[rowLength][colLength];
-
-        // bfs
-        // 시작점 큐에 넣기
-        Queue<int[]> queue = new ArrayDeque();
-
-        if(grid[0][0] == 1 || grid[rowLength - 1][colLength - 1] == 1) {
-            return -1;
+public class Solution {
+    public int[] solution(String[][] places) {
+        int[] answer = new int[5];
+        for (int i = 0; i < 5; i++) {
+            answer[i] = check(places[i]);
         }
+        return answer;
+    }
 
-        queue.offer(new int[]{0, 0, 1});
-        visited[0][0] = true;
+    private int check(String[] place) {
+        for (int i = 0; i < 5; i++) {
+            if (place[i].contains("P")) {
+                for (int j = 0; j < 5; j++) {
+                    if (place[i].charAt(j) == 'P') {
+                        if (!bfs(i, j, place)) return 0;
+                    }
+                }
+            }
+        }
+        return 1;
+    }
 
-        // while
-        while(!queue.isEmpty()) {
-            // 방문(큐에서 dequeue)
+    private boolean bfs(int sr, int sc, String[] place) {
+        int[] dr = {0, 0, 1, -1};
+        int[] dc = {1, -1, 0, 0};
 
+        Queue<int[]> queue = new ArrayDeque<>();
+        boolean[][] visited = new boolean[5][5];
+        queue.offer(new int[]{sr, sc, 0});
+        visited[sr][sc] = true;
+
+        while (!queue.isEmpty()) {
             int[] cur = queue.poll();
             int r = cur[0];
             int c = cur[1];
             int dist = cur[2];
 
-            // 도착했나? 체크 => return
-            if(r == rowLength - 1 && c == colLength - 1) {
-                return dist;
-            }
+            if (dist > 0 && place[r].charAt(c) == 'P') return false;
 
-            // 예약
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 4; i++) {
                 int nr = r + dr[i];
                 int nc = c + dc[i];
-                if(0 <= nr && nr < rowLength && 0 <= nc && nc < colLength && grid[nr][nc] == 0) {
-                    if(!visited[nr][nc]) {
+
+                if (nr >= 0 && nc >= 0 && nr < 5 && nc < 5 && !visited[nr][nc]) {
+                    if (dist + 1 <= 2 && place[nr].charAt(nc) != 'X') {
                         queue.offer(new int[]{nr, nc, dist + 1});
                         visited[nr][nc] = true;
                     }
                 }
             }
         }
-        return -1;
+        return true;
     }
 }
-
