@@ -27,11 +27,11 @@ class Solution {
 
         for (int i = 0; i < numbers.length(); i++) {
             if(!visited[i]) {
-                visited[i] = true;
+
                 int next = Integer.parseInt(s + numbers.charAt(i));
-                if (!ans.contains(next)) {
-                    ans.add(next);
-                }
+                if (!ans.contains(next)) ans.add(next);
+
+                visited[i] = true;
                 dfs(depth + 1, numbers, s + numbers.charAt(i));
                 visited[i] = false;
             }
